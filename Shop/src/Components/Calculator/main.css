@@ -1,0 +1,117 @@
+:root {
+    --back: #2e2e2e;
+    --cont: #1c1c1c;
+    --color: #ffffff;
+    --btn-hover: #ff8c00;
+    --btn-active: #e67600;
+    --btn-equal: #0078d7;
+    --btn-equal-hover: #005a9e;
+    --btn-equal-active: #004a8f;
+    --border-radius: 8px;
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--back);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.App {
+    background-color: var(--cont);
+    width: 320px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+p {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    background-color: var(--cont);
+    height: 60px;
+    color: var(--color);
+    font-size: 24px;
+    padding: 0 10px;
+    border: none;
+}
+
+p.pob {
+    height: 40px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+table {
+    width: 100%;
+    display: block;
+}
+
+tbody {
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+}
+
+tr {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+button {
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    display: block;
+    border: none;
+    font-size: 18px;
+    background-color: var(--cont);
+    color: var(--color);
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.1s;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: var(--btn-hover);
+}
+
+button:active {
+    background-color: var(--btn-active);
+    transform: scale(0.95);
+}
+
+button.equal {
+    background-color: var(--btn-equal);
+    color: var(--color);
+}
+
+button.equal:hover {
+    background-color: var(--btn-equal-hover);
+}
+
+button.equal:active {
+    background-color: var(--btn-equal-active);
+    transform: scale(0.95);
+}

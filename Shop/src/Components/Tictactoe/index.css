@@ -1,0 +1,38 @@
+.game {
+    padding-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-board {
+    margin-right: 20px;
+}
+
+.board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.square {
+    background: #fff;
+    border: 1px solid #999;
+    float: left;
+    font-size: 36px;
+    line-height: 100px;
+    height: 100px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 100px;
+}
+
+.square:focus {
+    outline: none;
+}
+
+.game-info {
+    margin-left: 20px;
+}
