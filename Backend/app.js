@@ -9,6 +9,12 @@ const host = "127.0.0.1";
 const port = 7000;
 const tokenKey = "ba21-dc43-fe65-hg87";
 
+const TelegramBot = require("node-telegram-bot-api");
+
+const botToken = "secret";
+const chatId = "secret";
+const bot = new TelegramBot(botToken);
+
 app.use(express.json());
 const cors = require("cors");
 app.use(
@@ -155,11 +161,24 @@ app.post("/api/cart", authenticateToken, async (req, res) => {
         if (!product) {
             return res.status(404).json({ error: "Product not found" });
         }
+
+        const user = await User.findByPk(req.user.id);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        const username = user.username;
+
         const cartItem = await CartItem.create({
             UserId: req.user.id,
             ProductId: productId,
             quantity,
         });
+
+        bot.sendMessage(
+            chatId,
+            `Пользователь ${username} добавил товар "${product.name}" в корзину.`
+        );
+
         res.status(201).json(cartItem);
     } catch (error) {
         console.log(error);
@@ -184,6 +203,13 @@ app.get("/api/cart", authenticateToken, async (req, res) => {
 app.delete("/api/cart/:productId", authenticateToken, async (req, res) => {
     try {
         const productId = req.params.productId;
+
+        const user = await User.findByPk(req.user.id);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        const username = user.username;
+
         const cartItem = await CartItem.findOne({
             where: { UserId: req.user.id, ProductId: productId },
         });
@@ -193,12 +219,23 @@ app.delete("/api/cart/:productId", authenticateToken, async (req, res) => {
         }
 
         await cartItem.destroy();
-        res.status(200).json({
-            message: "Product removed from cart successfully",
-        });
+
+        const product = await Product.findByPk(productId);
+        if (!product) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+
+        bot.sendMessage(
+            chatId,
+            `Пользователь ${username} удалил товар "${product.name}" из корзины.`
+        );
+
+        return res
+            .status(200)
+            .json({ message: "Product removed from cart successfully" });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: "Internal server error" });
     }
 });
 
