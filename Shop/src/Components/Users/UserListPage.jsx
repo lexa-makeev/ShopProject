@@ -27,6 +27,9 @@ function UserListPage() {
 
     return (
         <Box>
+            <Heading as="h1" mb={4} textAlign="center" marginBottom={"80px"}>
+                Пользователи
+            </Heading>
             <List spacing={3}>
                 {users.map((user) => (
                     <ListItem key={user.id}>

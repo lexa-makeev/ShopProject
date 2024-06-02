@@ -21,6 +21,7 @@ import ToDoList from "./Components/ToDoList/ToDoList";
 import Weather from "./Components/Weather/Weather";
 import TicTacToe from "./Components/Tictactoe/TicTacToe";
 import Calculator from "./Components/Calculator/Calculator";
+import About from "./Components/About/About";
 
 function App() {
     const [token, setToken] = useState(localStorage.getItem("token") || "");
@@ -35,7 +36,7 @@ function App() {
         <ChakraProvider>
             <Router>
                 <NavBar token={token} signout={signout} />
-                <Container maxW="xl" centerContent>
+                <Container maxW="90%" centerContent>
                     <Box p="4">
                         <Routes>
                             <Route
@@ -125,6 +126,7 @@ function App() {
                                     </ProtectedRoute>
                                 }
                             />
+                            <Route path="/about" element={<About />} />
                         </Routes>
                     </Box>
                 </Container>

@@ -9,7 +9,7 @@ import {
     Container,
     Heading,
 } from "@chakra-ui/react";
-import { FaEdit, FaTrash } from "react-icons/fa"; // Иконки для редактирования и удаления
+import { FaEdit, FaTrash } from "react-icons/fa";
 import axios from "axios";
 
 function Products() {
@@ -43,7 +43,7 @@ function Products() {
                 "http://127.0.0.1:7000/api/cart",
                 {
                     productId,
-                    quantity: 1, // Default quantity for now
+                    quantity: 1,
                 },
                 {
                     headers: {
@@ -73,7 +73,7 @@ function Products() {
                 }
             );
             console.log("Product deleted:", response.data);
-            // Обновляем список товаров после удаления
+
             setProducts(products.filter((product) => product.id !== productId));
         } catch (error) {
             console.error("Error deleting product:", error);
@@ -81,12 +81,19 @@ function Products() {
     };
 
     return (
-        <Container>
+        <Container maxW="100%">
             <Heading as="h1" mb={4} textAlign="center" marginBottom={"80px"}>
                 Продукты
             </Heading>
             <Box>
-                <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+                <Grid
+                    templateColumns={{
+                        base: "1fr",
+                        md: "repeat(2, 1fr)",
+                        lg: "repeat(3, 1fr)",
+                    }}
+                    gap={6}
+                >
                     {products.map((product) => (
                         <Box
                             key={product.id}
@@ -122,6 +129,7 @@ function Products() {
                             )}
                             <Button
                                 marginTop={"20px"}
+                                marginLeft={"2px"}
                                 colorScheme="teal"
                                 onClick={() => addToCart(product.id)}
                             >

@@ -26,7 +26,6 @@ function ResetPassword() {
                 }
             );
             console.log("Reset password response:", response.data);
-            // Handle success or error messages as needed
         } catch (error) {
             console.error("Error resetting password:", error);
         }
@@ -51,7 +50,7 @@ function ResetPassword() {
                 />
             </FormControl>
             <FormControl id="secretResponse">
-                <FormLabel>Секретный ответ</FormLabel>
+                <FormLabel>Секретное слово</FormLabel>
                 <Input
                     type="text"
                     value={secretResponse}
